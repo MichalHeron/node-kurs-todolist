@@ -1,0 +1,17 @@
+<h1>Nowe zadanie</h1>
+
+<form method="POST">
+    <div class="mb-3">
+        <label for=""  class="form-label">Nazwa taska</label>
+        <input type="text" value="<%=form.name%>" name="name"
+            class="form-control " required>
+    </div>
+    <div class="mb-3">
+        <label for=""  class="form-label">Opis taska</label>
+        <input type="text" value="<%= form.description %>" name="description" 
+            class="form-control" required>
+        <div class="form-text">Przynajmniej 3 znaki</div>
+    </div>
+   
+    <button class="btn btn-primary">Utwórz</button>
+</form>
