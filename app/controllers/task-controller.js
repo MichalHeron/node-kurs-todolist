@@ -41,20 +41,30 @@ class TaskController {
     // Przykła: task = await Task.findById('60fec8c43501d21b309befbd')
     // https://mongoosejs.com/docs/api.html#model_Model.findById
 
-    res.render('pages/tasks/edit');
+    const {id} = req.params
+    const task = await Task.findById(id)
+
+    res.render('pages/tasks/edit', {form: task});
   }
 
   async edit(req, res) {
     // pobierz task
-
+    const {id} = req.params
+    const task = await Task.findById(id)
     // zaktualizuj dane
+    task.title = req.body.name
+    task.description = req.body.description
 
     try {
       // zapisz i przekieruj na stronę główną
+      await task.save()
       res.redirect('/');
     } catch (e) {
       // jeśli są błędy, wyświetl ja na widoku
-      res.render('pages/tasks/edit');
+      res.render('pages/tasks/edit', 
+      {errors: e.errors,
+      form: req.body,}
+      );
     }
   }
 
